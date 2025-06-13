@@ -6,8 +6,8 @@ export default function Entrance() {
   const { signup } = useAuth();
 
   const respond = (FormData) => {
-    const response = FormData.get('name');
-    signup(response);
+    const userInputName = FormData.get('username');
+    signup(userInputName);
   };
 
   return (
@@ -26,7 +26,7 @@ export default function Entrance() {
       <form action={respond}>
         <label>
           Name
-          <input name="name" />
+          <input name="username" />
         </label>
         <button>Respond</button>
       </form>

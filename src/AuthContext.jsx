@@ -7,11 +7,10 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [token, setToken] = useState();
   const [location, setLocation] = useState("GATE");
-  const [userNameInput, setUserNameInput] = useState('');
 
   // TODO: signup
-  const signup = async () => {
-    const response = await fetch(`${API}/signup`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: userNameInput }) });
+  const signup = async (username) => {
+    const response = await fetch(`${API}/signup`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username }) });
     const responseObj = await response.json();
     setToken(responseObj.token);
     setLocation('TABLET');
@@ -19,7 +18,6 @@ export function AuthProvider({ children }) {
   // TODO: authenticate
   const authenticate = async () => {
     const response = await fetch(`${API}/authenticate`, { method: 'GET', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } });
-    const x = await response.json();
     if (!token) throw Error('no token');
     setLocation('TUNNEL');
   }
