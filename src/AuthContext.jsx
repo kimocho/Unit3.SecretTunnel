@@ -19,12 +19,9 @@ export function AuthProvider({ children }) {
   // TODO: authenticate
   const authenticate = async () => {
     const response = await fetch(`${API}/authenticate`, { method: 'GET', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } });
-    const responseJson = await response.json();
-    if (!token) {
-      throw Error('no token');
-    }
+    const x = await response.json();
+    if (!token) throw Error('no token');
     setLocation('TUNNEL');
-    console.log(responseJson);
   }
 
   const value = { location, signup, setLocation, authenticate };
